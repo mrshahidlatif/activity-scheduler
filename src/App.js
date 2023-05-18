@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Activities from "./Activities";
 import CreateAndEditActivity from "./CreateAndEditActivity";
 import axios from "axios";
+import { AppBar, Grid, Button, Typography } from "@mui/material";
 
 const App = () => {
     const [activities, setActivities] = useState([]);
@@ -79,9 +80,29 @@ const App = () => {
 
     return (
         <div>
-            <h1>Activity App</h1>
-            <Activities activities={activities} onEdit={handleEdit} onDelete={handleDelete} />
-            <button onClick={() => setOpen(true)}>Add New Activity</button>
+            <AppBar position="static" color="primary" sx={{ height: "50", p: 2 }}>
+                <Typography variant={"h4"}>Activity Scheduler App</Typography>
+            </AppBar>
+            <Grid container spacing={3} sx={{ mt: 1 }}>
+                <Grid item xs={6}>
+                    <Typography sx={{ ml: 4 }} variant={"h4"}>
+                        Scheduled Activities
+                    </Typography>
+                    <Button onClick={() => setOpen(true)} sx={{ ml: 4 }}>
+                        Add New Activity
+                    </Button>
+                    <Activities
+                        activities={activities}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete}
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <Typography sx={{ ml: 4 }} variant={"h4"}>
+                        Weather Forecaset
+                    </Typography>
+                </Grid>
+            </Grid>
             <CreateAndEditActivity
                 open={open}
                 onClose={() => setOpen(false)}

@@ -29,6 +29,7 @@ const CreateAndEditActivity = ({ open, onClose, onSave, activity }) => {
 
     const handleSave = () => {
         const updatedActivity = {
+            id: activity ? activity.id : null,
             user,
             type,
             datetime,

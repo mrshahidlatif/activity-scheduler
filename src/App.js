@@ -11,6 +11,7 @@ const App = () => {
     const [selectedActivity, setSelectedActivity] = useState(null);
 
     const handleEdit = (activity) => {
+        console.log("handle Edit", activity);
         setSelectedActivity(activity);
         setOpen(true);
     };
@@ -54,6 +55,8 @@ const App = () => {
     //     }
     // };
     const handleSave = async (updatedActivity) => {
+        console.log("updated activity ---", updatedActivity);
+        console.log("selected activity ---", selectedActivity);
         try {
             if (selectedActivity) {
                 await axios.put(
@@ -87,10 +90,10 @@ const App = () => {
             <Grid container spacing={3} sx={{ mt: 1 }}>
                 <Grid item xs={6}>
                     <Typography sx={{ ml: 4 }} variant={"h4"}>
-                        Scheduled Activities
+                        Activities
                     </Typography>
                     <Button onClick={() => setOpen(true)} sx={{ ml: 4 }}>
-                        Add New Activity
+                        Schedule New Activity
                     </Button>
                     <Activities
                         activities={activities}
@@ -105,7 +108,10 @@ const App = () => {
             </Grid>
             <CreateAndEditActivity
                 open={open}
-                onClose={() => setOpen(false)}
+                onClose={() => {
+                    setOpen(false);
+                    setSelectedActivity(null);
+                }}
                 onSave={handleSave}
                 activity={selectedActivity}
             />

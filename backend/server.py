@@ -14,8 +14,15 @@ db_config = {
     'database': 'turfcoach'
 }
 
+
 def get_db_connection():
     return mariadb.connect(**db_config)
+
+
+@app.route('/', methods=['GET'])
+def health_check():
+    return "Connected!"
+
 
 @app.route('/activities', methods=['GET'])
 def get_activities():
@@ -29,6 +36,7 @@ def get_activities():
     except mariadb.Error as e:
         print(f'Error connecting to MariaDB: {e}')
         return jsonify([]), 500
+
 
 @app.route('/activities', methods=['POST'])
 def add_activity():
@@ -45,6 +53,7 @@ def add_activity():
         print(f'Error connecting to MariaDB: {e}')
         return jsonify({'message': 'Failed to add activity'}), 500
 
+
 @app.route('/activities/<int:activity_id>', methods=['PUT'])
 def update_activity(activity_id):
     try:
@@ -60,6 +69,7 @@ def update_activity(activity_id):
         print(f'Error connecting to MariaDB: {e}')
         return jsonify({'message': 'Failed to update activity'}), 500
 
+
 @app.route('/activities/<int:activity_id>', methods=['DELETE'])
 def delete_activity(activity_id):
     try:
@@ -72,6 +82,7 @@ def delete_activity(activity_id):
     except mariadb.Error as e:
         print(f'Error connecting to MariaDB: {e}')
         return jsonify({'message': 'Failed to delete activity'}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

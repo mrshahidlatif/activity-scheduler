@@ -1,46 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Activities from "./Activities";
 import CreateAndEditActivity from "./CreateAndEditActivity";
 import axios from "axios";
 
 const App = () => {
-    const [activities, setActivities] = useState([
-        {
-            id: 1,
-            user: "John Doe",
-            type: "Meeting",
-            datetime: "2023-05-18 10:00",
-            pitchId: "ABC123",
-        },
-        {
-            id: 2,
-            user: "Jane Smith",
-            type: "Training",
-            datetime: "2023-05-18 14:30",
-            pitchId: "DEF456",
-        },
-        {
-            id: 3,
-            user: "Mark Johnson",
-            type: "Match",
-            datetime: "2023-05-19 18:00",
-            pitchId: "GHI789",
-        },
-        {
-            id: 4,
-            user: "Sarah Davis",
-            type: "Practice",
-            datetime: "2023-05-20 09:00",
-            pitchId: "JKL012",
-        },
-        {
-            id: 5,
-            user: "Michael Brown",
-            type: "Tournament",
-            datetime: "2023-05-21 13:00",
-            pitchId: "MNO345",
-        },
-    ]);
+    const [activities, setActivities] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedActivity, setSelectedActivity] = useState(null);
 
@@ -49,19 +13,67 @@ const App = () => {
         setOpen(true);
     };
 
-    const handleDelete = (activityId) => {
-        setActivities(activities.filter((activity) => activity.id !== activityId));
+    useEffect(() => {
+        fetchActivities();
+    }, []);
+
+    const fetchActivities = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:5000/activities");
+            setActivities(response.data);
+        } catch (error) {
+            console.error("Error fetching activities:", error);
+        }
     };
 
-    const handleSave = (updatedActivity) => {
-        if (selectedActivity) {
-            setActivities(
-                activities.map((activity) =>
-                    activity.id === selectedActivity.id ? updatedActivity : activity
-                )
+    // const handleDelete = (activityId) => {
+    //     setActivities(activities.filter((activity) => activity.id !== activityId));
+    // };
+    const handleDelete = async (activityId) => {
+        try {
+            await axios.delete(`http://127.0.0.1:5000/activities/${activityId}`);
+            setActivities((prevActivities) =>
+                prevActivities.filter((activity) => activity.id !== activityId)
             );
-        } else {
-            setActivities([...activities, { ...updatedActivity, id: Date.now() }]);
+        } catch (error) {
+            console.error("Error deleting activity:", error);
+        }
+    };
+
+    // const handleSave = (updatedActivity) => {
+    //     if (selectedActivity) {
+    //         setActivities(
+    //             activities.map((activity) =>
+    //                 activity.id === selectedActivity.id ? updatedActivity : activity
+    //             )
+    //         );
+    //     } else {
+    //         setActivities([...activities, { ...updatedActivity, id: Date.now() }]);
+    //     }
+    // };
+    const handleSave = async (updatedActivity) => {
+        try {
+            if (selectedActivity) {
+                await axios.put(
+                    `http://127.0.0.1:5000/activities/${selectedActivity.id}`,
+                    updatedActivity
+                );
+                setActivities((prevActivities) =>
+                    prevActivities.map((activity) =>
+                        activity.id === selectedActivity.id ? updatedActivity : activity
+                    )
+                );
+            } else {
+                await axios.post("http://127.0.0.1:5000/activities", updatedActivity);
+                setActivities((prevActivities) => [
+                    ...prevActivities,
+                    { ...updatedActivity, id: Date.now() },
+                ]);
+            }
+            setSelectedActivity(null);
+            setOpen(false);
+        } catch (error) {
+            console.error("Error saving activity:", error);
         }
     };
 

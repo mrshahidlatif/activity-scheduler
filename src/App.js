@@ -114,6 +114,7 @@ const App = () => {
                 }}
                 onSave={handleSave}
                 activity={selectedActivity}
+                activities={activities}
             />
         </div>
     );

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
-const CreateAndEditActivity = ({ open, onClose, onSave, activity }) => {
+const CreateAndEditActivity = ({ open, onClose, onSave, activity, activities }) => {
     const [user, setUser] = useState("");
     const [type, setType] = useState("");
     const [datetime, setDatetime] = useState("");
@@ -28,6 +28,14 @@ const CreateAndEditActivity = ({ open, onClose, onSave, activity }) => {
     }, [activity]);
 
     const handleSave = () => {
+        const existingActivity = activities.find(
+            (act) => act.pitchId === pitchId && act.datetime === datetime
+        );
+
+        if (existingActivity) {
+            alert("Cannot schedule two activities on the same pitch at the same time");
+            return;
+        }
         const updatedActivity = {
             id: activity ? activity.id : null,
             user,

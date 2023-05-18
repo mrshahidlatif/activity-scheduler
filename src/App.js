@@ -3,6 +3,7 @@ import Activities from "./Activities";
 import CreateAndEditActivity from "./CreateAndEditActivity";
 import axios from "axios";
 import { AppBar, Grid, Button, Typography } from "@mui/material";
+import WeatherForecast from "./WeatherForecast";
 
 const App = () => {
     const [activities, setActivities] = useState([]);
@@ -98,9 +99,8 @@ const App = () => {
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <Typography sx={{ ml: 4 }} variant={"h4"}>
-                        Weather Forecaset
-                    </Typography>
+                    <Typography variant={"h4"}>Weather Forecaset</Typography>
+                    <WeatherForecast />
                 </Grid>
             </Grid>
             <CreateAndEditActivity

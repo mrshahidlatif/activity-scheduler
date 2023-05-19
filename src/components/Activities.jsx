@@ -9,7 +9,7 @@ const Activities = ({ activities, onEdit, onDelete }) => {
                 {activities.map((activity) => (
                     <Grid item key={activity.id + 1}>
                         <Activity
-                            key={activity.id} // Assuming each activity has a unique id
+                            key={activity.id}
                             activity={activity}
                             onEdit={() => onEdit(activity)}
                             onDelete={() => onDelete(activity.id)}

@@ -4,7 +4,7 @@ Here are the instructions to start the application locally. Please note that the
 
 ## Set the database
 
-The name of database is `turfcoach` with a single table `activities`. I have included an SQL dump so that it is easier to populate few sample records. See `/backend/database/turfcoach.sql`.
+The name of database is `turfcoach` with a single table `activities`. I have included an SQL script to create the database, table, and even populate it with few sample records. See `/backend/database/turfcoach.sql`.
 
 ### Database configuration
 

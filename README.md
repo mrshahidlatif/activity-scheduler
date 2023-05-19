@@ -22,19 +22,19 @@ The backend is developed in Python using Flask and MariaDB. Follow the following
 #### Create a virtual environment
 
 ```bash
-python3 -m venv .env
+python3 -m venv venv
 ```
 
 #### Activiate the environment
 
 ```bash
-source .env/bin/activate
+call venv/Scripts/activate
 ```
 
 OR
 
 ```bash
-call venv/Scripts/activate
+source venv/bin/activate
 ```
 
 #### Install dependencies

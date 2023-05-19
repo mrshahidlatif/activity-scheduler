@@ -5,16 +5,6 @@ const Activity = ({ activity, onEdit, onDelete }) => {
     const { user, type, datetime, pitchId } = activity;
 
     return (
-        // <Card sx={{ background: "#e3e4e6" }}>
-        //     <CardContent>
-        //         <h2>Type: {type}</h2>
-        //         <p>Assigned To: {user}</p>
-        //         <p>Datetime: {datetime}</p>
-        //         <p>Pitch ID: {pitchId}</p>
-        //         <Button onClick={onEdit}>Edit</Button>
-        //         <Button onClick={onDelete}>Delete</Button>
-        //     </CardContent>
-        // </Card>
         <Card sx={{ width: 200, background: "#e3e4e6" }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

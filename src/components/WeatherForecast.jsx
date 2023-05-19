@@ -39,13 +39,13 @@ const WeatherForecast = () => {
         <Stack spacing={2}>
             <Typography variant="h5">{currentTemperature}&deg;</Typography>
             <Typography variant="caption">
-                Forecast of Temperature & Precipitation for next 12 Hours. The forecast is shown for
-                the city of BERLIN.
+                Forecast of Temperature & Precipitation for next 12 Hours starting from now. The
+                forecast is shown for the city of BERLIN.
             </Typography>
             <Stack direction={"row"} spacing={1}>
                 {weatherForecast.temperature.map((_, idx) => (
                     <Box key={idx} sx={{ width: 50 }}>
-                        {(idx + new Date().getHours()) % 24}
+                        {((idx + new Date().getHours()) % 24).toString().padStart(2, "0")}
                     </Box>
                 ))}
             </Stack>

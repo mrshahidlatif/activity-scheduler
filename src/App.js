@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Activities from "./Activities";
-import CreateAndEditActivity from "./CreateAndEditActivity";
+import Activities from "./components/Activities";
+import CreateAndEditActivity from "./components/CreateAndEditActivity";
 import axios from "axios";
 import { AppBar, Grid, Button, Typography } from "@mui/material";
-import WeatherForecast from "./WeatherForecast";
+import WeatherForecast from "./components/WeatherForecast";
+
+const BASE_URL = "http://127.0.0.1:5000";
 
 const App = () => {
     const [activities, setActivities] = useState([]);
@@ -11,7 +13,6 @@ const App = () => {
     const [selectedActivity, setSelectedActivity] = useState(null);
 
     const handleEdit = (activity) => {
-        console.log("handle Edit", activity);
         setSelectedActivity(activity);
         setOpen(true);
     };
@@ -22,19 +23,15 @@ const App = () => {
 
     const fetchActivities = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:5000/activities");
+            const response = await axios.get(`${BASE_URL}/activities`);
             setActivities(response.data);
         } catch (error) {
             console.error("Error fetching activities:", error);
         }
     };
-
-    // const handleDelete = (activityId) => {
-    //     setActivities(activities.filter((activity) => activity.id !== activityId));
-    // };
     const handleDelete = async (activityId) => {
         try {
-            await axios.delete(`http://127.0.0.1:5000/activities/${activityId}`);
+            await axios.delete(`${BASE_URL}/activities/${activityId}`);
             setActivities((prevActivities) =>
                 prevActivities.filter((activity) => activity.id !== activityId)
             );
@@ -42,34 +39,17 @@ const App = () => {
             console.error("Error deleting activity:", error);
         }
     };
-
-    // const handleSave = (updatedActivity) => {
-    //     if (selectedActivity) {
-    //         setActivities(
-    //             activities.map((activity) =>
-    //                 activity.id === selectedActivity.id ? updatedActivity : activity
-    //             )
-    //         );
-    //     } else {
-    //         setActivities([...activities, { ...updatedActivity, id: Date.now() }]);
-    //     }
-    // };
     const handleSave = async (updatedActivity) => {
-        console.log("updated activity ---", updatedActivity);
-        console.log("selected activity ---", selectedActivity);
         try {
             if (selectedActivity) {
-                await axios.put(
-                    `http://127.0.0.1:5000/activities/${selectedActivity.id}`,
-                    updatedActivity
-                );
+                await axios.put(`${BASE_URL}/activities/${selectedActivity.id}`, updatedActivity);
                 setActivities((prevActivities) =>
                     prevActivities.map((activity) =>
                         activity.id === selectedActivity.id ? updatedActivity : activity
                     )
                 );
             } else {
-                await axios.post("http://127.0.0.1:5000/activities", updatedActivity);
+                await axios.post(`${BASE_URL}/activities`, updatedActivity);
                 setActivities((prevActivities) => [
                     ...prevActivities,
                     { ...updatedActivity, id: Date.now() },

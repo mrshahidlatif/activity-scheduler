@@ -17,10 +17,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `turfcoach`
---
+-- Create the turfcoach database
+CREATE DATABASE IF NOT EXISTS turfcoach;
 
+-- Switch to the turfcoach database
+USE turfcoach;
 -- --------------------------------------------------------
 
 --
@@ -40,13 +41,13 @@ CREATE TABLE `activities` (
 --
 
 INSERT INTO `activities` (`id`, `user`, `type`, `datetime`, `pitchId`) VALUES
-(14, 'John', 'Mowing', '2023-05-18 23:27:57', '1'),
-(15, 'Tom', 'Fertilisation', '2023-05-17 23:27:57', '2'),
-(23, 'John', 'Mowing', '2023-05-19 00:05:49', '1'),
-(24, 'Tom', 'Fertilisation', '2023-05-18 00:05:49', '2'),
-(25, 'Tony', 'Irrigation', '2023-05-17 00:05:49', '3'),
-(26, 'John', 'Aeration', '2023-05-16 00:05:49', '1'),
-(27, 'Tom', 'Mowing', '2023-05-15 00:05:49', '2');
+(14, 'John', 'Mowing', '2023-05-18T23:27:57', '1'),
+(15, 'Tom', 'Fertilisation', '2023-05-17T23:27:57', '2'),
+(23, 'John', 'Mowing', '2023-05-19T00:05:49', '1'),
+(24, 'Tom', 'Fertilisation', '2023-05-18T00:05:49', '2'),
+(25, 'Tony', 'Irrigation', '2023-05-17T00:05:49', '3'),
+(26, 'John', 'Aeration', '2023-05-16T00:05:49', '1'),
+(27, 'Tom', 'Mowing', '2023-05-15T00:05:49', '2');
 
 --
 -- Indexes for dumped tables

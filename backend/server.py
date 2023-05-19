@@ -5,6 +5,8 @@ import mariadb
 app = Flask(__name__)
 CORS(app)
 
+app.config.from_object('config')
+
 # Database connection configuration
 db_config = {
     'host': 'localhost',
@@ -85,4 +87,4 @@ def delete_activity(activity_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=app.config["PORT"], debug=app.config["DEBUG"])

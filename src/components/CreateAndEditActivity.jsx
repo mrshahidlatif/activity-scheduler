@@ -29,9 +29,8 @@ const CreateAndEditActivity = ({ open, onClose, onSave, activity, activities }) 
 
     const handleSave = () => {
         const existingActivity = activities.find(
-            (act) => act.pitchId === pitchId && act.datetime === datetime
+            (act) => act.pitchId === pitchId && act.datetime === datetime && act.id !== activity?.id
         );
-
         if (existingActivity) {
             alert("Cannot schedule two activities on the same pitch at the same time");
             return;

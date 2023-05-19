@@ -43,14 +43,18 @@ call venv/Scripts/activate
 pip3 install -r requirements.txt
 ```
 
-#### Run the server
+#### Finally run the server
 
 ```bash
 python3 server.py
 ```
 
-Make sure the backend server is running at `http://127.0.0.1:5000/`
+Make sure the backend server is running at `http://127.0.0.1:5000/`. Otherwise change the `baseUrl` property to the correct URL in `/src/App.js`.
 
-## Frontend Application
+### Weather API
+
+The API to fetch weather data is free & opensource - it doesn't require any key. Here you find more information about this API: [Open-Meteo](https://open-meteo.com/)
+
+## Run the frontend application
 
 You can install the dependencies by doing an `npm install`. Then do an `npm start` to start the application at `http://localhost:3000/`
